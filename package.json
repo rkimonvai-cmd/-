@@ -1,0 +1,13 @@
+{
+  "name": "acs-tonmoy-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ACS TONMOY STUDIO - password-protected Google Drive video gallery",
+  "main": "Server.js",
+  "scripts": { "start": "node Server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  }
+}

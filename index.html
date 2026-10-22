@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05080d">
+<title>𒁂『 𝘼𝘾𝙎 』☀︎『 𝙏𝙊𝙉𝙈𝙊𝙔 』⌫ 𝙎𝙏𝙐𝘿𝙄𝙊 💾</title>
+
+<style>
+:root{
+  --bg:#05080d;
+  --panel:#0b131c;
+  --line:#173d48;
+  --cyan:#45f3ff;
+  --green:#7bffb0;
+  --muted:#8ca4b4;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(ellipse at top,#10212c 0,#05080d 55%);
+  color:#e7fbff;
+  font-family:system-ui,Arial,sans-serif;
+  min-height:100vh;
+}
+header{
+  padding:20px 12px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+  background:#05080deF;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(12px);
+  z-index:2;
+}
+
+/* TWO ROTATING ROUND PICTURES */
+.avatar-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:22px;
+  margin:0 auto 16px;
+}
+.avatar-wrap{
+  width:72px;
+  height:72px;
+  padding:3px;
+  border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    #45f3ff,#7bffb0,#8b5cf6,#ff00cc,#45f3ff
+  );
+  box-shadow:0 0 12px #45f3ff66,0 0 25px #00eaff22;
+  animation:orbit 4s linear infinite;
+}
+.avatar-wrap.second{
+  animation-duration:6s;
+  animation-direction:reverse;
+}
+.avatar-wrap img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid #05080d;
+  background:#0b131c;
+}
+@keyframes orbit{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.logo{
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--cyan);
+  text-shadow:0 0 16px #00d9ff88;
+  font-size:clamp(17px,4vw,30px);
+}
+.sub{
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:2px;
+  margin-top:8px;
+}
+nav{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+button,.btn{
+  background:#0c2029;
+  border:1px solid #23606b;
+  color:var(--cyan);
+  padding:10px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+button:hover,.btn:hover{
+  background:#123642;
+  box-shadow:0 0 18px #00d9ff22;
+}
+button:disabled{opacity:.6;cursor:wait}
+
+main{max-width:1100px;margin:auto;padding:24px 16px}
+.status{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  color:var(--green);
+  font-size:12px;
+  margin-bottom:20px;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+.card{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#0c1721,#071016);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 12px 40px #0005;
+}
+.thumb{
+  height:155px;
+  display:grid;
+  place-items:center;
+  background:repeating-linear-gradient(
+    135deg,#091720,#091720 12px,#0b202a 12px,#0b202a 24px
+  );
+  color:var(--cyan);
+  font-size:36px;
+}
+.body{padding:16px}
+.body h3{margin:0 0 8px}
+.body p{color:var(--muted);font-size:13px}
+.meta{font-size:12px;color:#6d9ca8;margin:14px 0}
+.empty{
+  border:1px dashed #24505b;
+  padding:36px;text-align:center;
+  border-radius:15px;color:var(--muted);
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#020509ed;
+  z-index:5;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  overflow-y:auto;
+}
+.modal{
+  width:min(440px,100%);
+  background:#07121b;
+  border:1px solid var(--cyan);
+  box-shadow:0 0 40px #00eaff22;
+  border-radius:15px;
+  padding:24px;
+}
+.terminal{
+  color:var(--green);
+  font:13px ui-monospace,monospace;
+  min-height:38px;
+  margin:10px 0;
+  white-space:pre-line;
+}
+.modal input{
+  width:100%;
+  padding:13px;
+  background:#02080d;
+  border:1px solid #28515d;
+  border-radius:8px;
+  color:white;
+  margin:8px 0 14px;
+  outline:none;
+}
+.modal h2{color:var(--cyan);margin-top:0}
+.watch{
+  width:100%;
+  aspect-ratio:16/9;
+  border:1px solid #204a56;
+  border-radius:10px;
+  background:#000;
+}
+.close{float:right}
+.notice{
+  font-size:12px;
+  color:#819aa7;
+  margin-top:22px;
+  text-align:center;
+}
+
+/* WELCOME SCREEN */
+.welcome-box{text-align:center}
+.welcome-skull{
+  font-size:35px;
+  color:var(--cyan);
+  text-shadow:0 0 20px var(--cyan);
+  margin-bottom:8px;
+}
+.welcome-heading{
+  color:var(--cyan);
+  font-size:22px;
+  font-weight:900;
+  text-shadow:0 0 12px #00eaff66;
+  margin:5px 0 16px;
+}
+.welcome-message{
+  color:#d9edf3;
+  line-height:1.8;
+  font-size:14px;
+  overflow-wrap:anywhere;
+}
+.welcome-message strong{color:var(--green)}
+.welcome-actions{
+  display:grid;
+  gap:10px;
+  margin-top:20px;
+}
+.welcome-actions button{width:100%}
+.welcome-small{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:14px;
+}
+@media(max-width:420px){
+  .avatar-wrap{width:62px;height:62px}
+  .avatar-row{gap:18px}
+  .logo{letter-spacing:1px}
+}
+@media(prefers-reduced-motion:reduce){
+  .avatar-wrap{animation-duration:12s}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <!-- Replace both URLs with your Catbox image links -->
+  <div class="avatar-row">
+    <div class="avatar-wrap">
+      <img
+        src="https://files.catbox.moe/61b7z1.jpeg"
+        alt="ACS TONMOY profile picture"
+        referrerpolicy="no-referrer"
+        onerror="this.style.opacity='.35'"
+      >
+    </div>
+
+    <div class="avatar-wrap second">
+      <img
+        src="https://files.catbox.moe/bom5qu.jpg"
+        alt="ACS TONMOY Studio profile picture"
+        referrerpolicy="no-referrer"
+        onerror="this.style.opacity='.35'"
+      >
+    </div>
+  </div>
+
+  <div class="logo">
+    𒁂『 𝘼𝘾𝙎 』☀︎『 𝙏𝙊𝙉𝙈𝙊𝙔 』⌫ 𝙎𝙏𝙐𝘿𝙄𝙊 💾
+  </div>
+
+  <div class="sub">PRIVATE MEDIA NETWORK // PUBLIC STUDIO</div>
+    <div class="sub">Attack Cyber Security - Acs </div>
+      <div class="sub">This Web By ° ACS TONMOY</div>
+
+  <nav>
+    <button onclick="loadVideos()">⌂ PUBLIC STUDIO</button>
+  </nav>
+</header>
+
+<main>
+  <div class="status">
+    <span class="dot"></span>
+    <span id="statusText">SYSTEM ONLINE // CONNECTING...</span>
+  </div>
+
+  <div id="videos" class="grid"></div>
+
+  <div class="notice">
+    ACS TONMOY STUDIO · Authorized viewing only · Passwords are case-sensitive
+  </div>
+</main>
+
+<!-- WELCOME MESSAGE -->
+<div class="overlay" id="welcome">
+  <div class="modal welcome-box">
+    <div class="welcome-skull">☠</div>
+    <div class="welcome-heading">WELCOME TO ACS STUDIO</div>
+
+    <div class="welcome-message">
+      আপনাকে স্বাগতম!<br><br>
+
+      <strong>𝗧𝗛𝗜𝗦 𝗦𝗧𝗨𝗗𝗜𝗢 𝗪𝗘𝗕 𝗠𝗔𝗞𝗜𝗡𝗚</strong><br>
+      𝗕𝗬 𝗔𝗖𝗦 𝗧𝗢𝗡𝗠𝗢𝗬 · 𝗘𝗗𝗢𝗖𝗔𝗧𝗜𝗢𝗡 𝗘𝗛𝗜𝗖𝗔𝗟 𝗛𝗔𝗖𝗞𝗜𝗡𝗚<br><br>
+
+      This Web Only Education Properly.<br>
+      Enjoy This Web...<br><br>
+
+      Thank You For Attack Cyber Security Leader Vai<br>
+      <strong>𝗔𝗖𝗦 𝗟𝗘𝗔𝗗𝗘𝗥 𝗩𝗔𝗨 𝗧𝗢𝗡𝗠𝗢𝗬</strong>
+    </div>
+
+    <div class="welcome-actions">
+      <button onclick="enterStudio(true)">⚡ ENTER STUDIO + VOICE</button>
+    </div>
+
+    <div class="welcome-small">
+      CYBER EDUCATION · LEARN RESPONSIBLY · STAY SECURE
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO PASSWORD CHECK -->
+<div class="overlay" id="gate">
+  <div class="modal">
+    <button class="close" onclick="closeGate()">✕</button>
+    <h2>⌁ ACCESS CHECKPOINT</h2>
+    <div class="terminal" id="typing">Initializing secure viewer...</div>
+
+    <form id="passForm">
+      <label for="pass">ENTER VIDEO PASSWORD</label>
+      <input
+        id="pass"
+        type="password"
+        autocomplete="off"
+        required
+        placeholder="Enter current access key"
+      >
+      <button style="width:100%" type="submit">
+        UNLOCK VIDEO ↗
+      </button>
+    </form>
+
+    <p id="gateError" style="color:#ff8181;font-size:13px"></p>
+  </div>
+</div>
+
+<!-- VIDEO PLAYER -->
+<div class="overlay" id="player">
+  <div class="modal" style="width:min(900px,100%)">
+    <button class="close" onclick="closePlayer()">✕</button>
+    <h2 id="playerTitle">VIDEO PLAYER</h2>
+    <div id="frame"></div>
+    <p id="playerDesc" style="color:#8ca4b4"></p>
+  </div>
+</div>
+
+<script>
+let chosen = null;
+
+/* WELCOME MESSAGE AND OPTIONAL VOICE */
+const welcomeSpeech =
+  "Welcome O। A C S Tonmoy. Ethical Hacking. Websites. " +
+  "This web ur for educational purposes. Enjoy this web. " +
+  "Thank you for Attack Cyber Security Leader Vai. A C S Tonmoy.";
+
+function enterStudio(withVoice) {
+  document.getElementById("welcome").style.display = "none";
+
+  if (withVoice && "speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+
+    const message = new SpeechSynthesisUtterance(welcomeSpeech);
+    message.lang = "en-US";
+    message.rate = 0.88;
+    message.pitch = 0.85;
+
+    window.speechSynthesis.speak(message);
+  }
+}
+
+/* Show welcome popup whenever the page opens */
+window.addEventListener("load", () => {
+  document.getElementById("welcome").style.display = "flex";
+});
+
+/* LOAD PUBLIC VIDEOS */
+async function loadVideos() {
+  const el = document.getElementById("videos");
+  const status = document.getElementById("statusText");
+
+  el.innerHTML =
+    '<div class="empty">SCANNING PUBLIC STUDIO...</div>';
+
+  try {
+    const r = await fetch("/api/videos");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+
+    const d = await r.json();
+
+    if (!Array.isArray(d)) {
+      throw new Error("Invalid server response");
+    }
+
+    status.textContent =
+      "SYSTEM ONLINE // " + d.length + " VIDEO RECORD(S)";
+
+    if (!d.length) {
+      el.innerHTML =
+        '<div class="empty">NO VIDEOS PUBLISHED YET<br><br>' +
+        "Admin can publish a public Google Drive link.</div>";
+      return;
+    }
+
+    el.innerHTML = d.map(v => `
+      <article class="card">
+        <div class="thumb">▶</div>
+        <div class="body">
+          <h3>${esc(v.title)}</h3>
+          <p>${esc(v.description || "Secure studio video")}</p>
+          <div class="meta">
+            ◉ ${Number(v.views || 0)} VIEWS · ⛨ PASSWORD PROTECTED
+          </div>
+          <button data-video-id="${esc(v.id)}" class="watch-button">
+            ▶ WATCH VIDEO
+          </button>
+        </div>
+      </article>
+    `).join("");
+
+    el.querySelectorAll(".watch-button").forEach(button => {
+      button.addEventListener("click", () => {
+        openGate(button.dataset.videoId);
+      });
+    });
+
+  } catch (e) {
+    el.innerHTML =
+      '<div class="empty">SERVER CONNECTION FAILED<br><br>' +
+      "Check your API URL and backend status, then refresh.</div>";
+
+    status.textContent = "SERVER CONNECTION FAILED";
+  }
+}
+
+/* ESCAPE UNTRUSTED TEXT */
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+}
+
+/* PASSWORD CHECKPOINT */
+function openGate(id) {
+  chosen = id;
+
+  document.getElementById("gate").style.display = "flex";
+  document.getElementById("gateError").textContent = "";
+  document.getElementById("pass").value = "";
+
+  const t = document.getElementById("typing");
+  const msg =
+    "> Establishing secure session...\n" +
+    "> Verify access key to continue.";
+
+  t.textContent = "";
+  let i = 0;
+
+  function tick() {
+    if (i < msg.length) {
+      t.textContent += msg[i++];
+      setTimeout(tick, 22);
+    }
+  }
+
+  tick();
+  setTimeout(() => document.getElementById("pass").focus(), 100);
+}
+
+function closeGate() {
+  document.getElementById("gate").style.display = "none";
+}
+
+function closePlayer() {
+  document.getElementById("player").style.display = "none";
+  document.getElementById("frame").innerHTML = "";
+  loadVideos();
+}
+
+/* VERIFY PASSWORD AND OPEN VIDEO */
+document.getElementById("passForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const b = e.submitter;
+  b.disabled = true;
+
+  try {
+    const r = await fetch(
+      "/api/watch/" + encodeURIComponent(chosen),
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          password: document.getElementById("pass").value
+        })
+      }
+    );
+
+    const d = await r.json();
+
+    if (!r.ok) {
+      throw new Error(d.error || "Access denied");
+    }
+
+    closeGate();
+
+    document.getElementById("playerTitle").textContent = d.title;
+    document.getElementById("playerDesc").textContent =
+      d.description || "";
+
+    const frame = document.createElement("iframe");
+    frame.className = "watch";
+    frame.src = d.embedUrl;
+    frame.title = "Video player";
+    frame.allow =
+      "autoplay; encrypted-media; picture-in-picture";
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = "strict-origin-when-cross-origin";
+
+    const frameBox = document.getElementById("frame");
+    frameBox.replaceChildren(frame);
+
+    document.getElementById("player").style.display = "flex";
+
+  } catch (err) {
+    document.getElementById("gateError").textContent =
+      "ACCESS DENIED: " + err.message;
+  } finally {
+    b.disabled = false;
+  }
+});
+
+loadVideos();
+</script>
+</body>
+</html>

@@ -1,630 +1,380 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05080d">
-<title>ACS TONMOY // ADMIN CONSOLE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05080d">
+  <title>ACS TONMOY // ADMIN CONSOLE</title>
 
-<style>
-*{box-sizing:border-box}
-:root{
-  --cyan:#45f3ff;
-  --green:#7bffb0;
-  --bg:#05080d;
-  --line:#1b4854;
-  --muted:#8ca4b4;
-}
-body{
-  margin:0;
-  background:radial-gradient(ellipse at top,#11232e,#05080d 65%);
-  color:#e8fbff;
-  font-family:system-ui,Arial,sans-serif;
-  min-height:100vh;
-}
-header{
-  border-bottom:1px solid var(--line);
-  padding:20px;
-  background:#05080dcc;
-  text-align:center;
-}
-.brand{
-  color:var(--cyan);
-  font-weight:900;
-  letter-spacing:1px;
-  font-size:clamp(19px,4vw,28px);
-  text-shadow:0 0 15px #45f3ff55;
-}
-.muted{color:var(--muted);font-size:13px}
-.wrap{max-width:1000px;margin:auto;padding:24px 15px}
-.panel{
-  border:1px solid var(--line);
-  background:#0a141d;
-  border-radius:14px;
-  padding:20px;
-  margin:18px 0;
-  box-shadow:0 10px 35px #0003;
-}
-.panel h2{color:var(--cyan);font-size:18px;margin-top:0}
-input,textarea{
-  display:block;
-  width:100%;
-  padding:12px;
-  margin:8px 0 14px;
-  background:#03090e;
-  border:1px solid #28515d;
-  border-radius:8px;
-  color:white;
-  outline:none;
-}
-input:focus,textarea:focus{
-  border-color:var(--cyan);
-  box-shadow:0 0 12px #45f3ff22;
-}
-textarea{min-height:80px;resize:vertical}
-button,.btn{
-  padding:11px 15px;
-  background:#0d2730;
-  border:1px solid #28717b;
-  border-radius:8px;
-  color:var(--cyan);
-  font-weight:700;
-  cursor:pointer;
-  margin:3px;
-  text-decoration:none;
-  display:inline-block;
-}
-button:hover,.btn:hover{
-  background:#143843;
-  box-shadow:0 0 15px #45f3ff22;
-}
-button:disabled{opacity:.5;cursor:wait}
-.hidden{display:none!important}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:12px;
-}
-.stat{
-  background:#071018;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:15px;
-}
-.stat strong{
-  display:block;
-  font-size:24px;
-  color:var(--green);
-  overflow-wrap:anywhere;
-}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.row>*{flex:1;min-width:180px}
-.msg{color:var(--green);white-space:pre-wrap;overflow-wrap:anywhere}
-.bad{color:#ff9b9b}
-.small{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
-.video{
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:14px;
-  margin:10px 0;
-  overflow-wrap:anywhere;
-  background:#071018;
-}
-.video-title{color:var(--cyan);font-weight:800}
-.checkbox-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 0;
-}
-.checkbox-row input{width:auto;margin:0}
-.status-dot{
-  display:inline-block;
-  width:8px;height:8px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 10px var(--green);
-  margin-right:7px;
-}
-footer{
-  text-align:center;
-  padding:18px;
-  color:var(--muted);
-  font-size:12px;
-}
-@media(max-width:480px){
-  .panel{padding:15px}
-  .row>*{min-width:100%}
-}
-</style>
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --cyan:#45f3ff;
+      --green:#7bffb0;
+      --bg:#05080d;
+      --line:#1b4854;
+      --muted:#8ca4b4;
+      --danger:#ff8f8f;
+    }
+    body{margin:0;background:radial-gradient(ellipse at top,#11232e,#05080d 65%);color:#e8fbff;font-family:system-ui,Arial,sans-serif;min-height:100vh}
+    header{border-bottom:1px solid var(--line);padding:20px;background:#05080dcc;text-align:center}
+    .brand{color:var(--cyan);font-weight:900;letter-spacing:1px;font-size:clamp(19px,4vw,28px);text-shadow:0 0 15px #45f3ff55}
+    .muted{color:var(--muted);font-size:13px}
+    .wrap{max-width:1100px;margin:auto;padding:24px 15px}
+    .panel{border:1px solid var(--line);background:#0a141d;border-radius:14px;padding:20px;margin:18px 0;box-shadow:0 10px 35px #0003}
+    .panel h2{color:var(--cyan);font-size:18px;margin-top:0}
+    input,textarea{display:block;width:100%;padding:12px;margin:8px 0 14px;background:#03090e;border:1px solid #28515d;border-radius:8px;color:white;outline:none}
+    input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 12px #45f3ff22}
+    textarea{min-height:80px;resize:vertical}
+    button,.btn{padding:11px 15px;background:#0d2730;border:1px solid #28717b;border-radius:8px;color:var(--cyan);font-weight:700;cursor:pointer;margin:3px;text-decoration:none;display:inline-block}
+    button:hover,.btn:hover{background:#143843;box-shadow:0 0 15px #45f3ff22}
+    button:disabled{opacity:.5;cursor:wait}
+    .hidden{display:none!important}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+    .stat{background:#071018;border:1px solid var(--line);border-radius:10px;padding:15px}
+    .stat strong{display:block;font-size:24px;color:var(--green);overflow-wrap:anywhere}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .row>*{flex:1;min-width:180px}
+    .msg{color:var(--green);white-space:pre-wrap;overflow-wrap:anywhere}
+    .bad{color:#ff9b9b}
+    .small{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+    .video{border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0;overflow-wrap:anywhere;background:#071018}
+    .video-title{color:var(--cyan);font-weight:800}
+    .checkbox-row{display:flex;align-items:center;gap:8px;padding:8px 0}
+    .checkbox-row input{width:auto;margin:0}
+    .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);margin-right:7px}
+    .chat-list{display:grid;gap:12px}
+    .chat-thread{background:#071018;border:1px solid var(--line);border-radius:12px;padding:14px}
+    .chat-thread strong{color:var(--cyan)}
+    .chat-thread .meta{font-size:11px;color:var(--muted)}
+    .reply-box{margin-top:10px;display:grid;gap:8px}
+    .reply-box textarea{min-height:72px}
+    footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
+    @media(max-width:480px){.panel{padding:15px}.row>*{min-width:100%}}
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="brand">⌘ ACS TONMOY // ADMIN CONSOLE</div>
+    <div class="muted">STUDIO CONTROL · PUBLISHING · VIEW COUNTS · CHAT</div>
+    <div class="small" style="margin-top:10px"><span class="status-dot"></span> SECURE ADMIN INTERFACE</div>
+  </header>
 
-<header>
-  <div class="brand">⌘ ACS TONMOY // ADMIN CONSOLE</div>
-  <div class="muted">STUDIO CONTROL · PUBLISHING · VIEW COUNTS</div>
-  <div class="small" style="margin-top:10px">
-    <span class="status-dot"></span> SECURE ADMIN INTERFACE
-  </div>
-</header>
+  <main class="wrap">
+    <section id="loginPanel" class="panel">
+      <h2>⌁ ADMIN AUTHENTICATION</h2>
+      <p class="muted">Sign in using credentials configured on the Render server.</p>
+      <form id="loginForm">
+        <label for="username">Admin Username</label>
+        <input id="username" name="username" value="115577" required autocomplete="username" placeholder="Admin username">
 
-<main class="wrap">
+        <label for="password">Admin Password</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="Enter admin password">
 
-  <!-- LOGIN -->
-  <section id="loginPanel" class="panel">
-    <h2>⌁ ADMIN AUTHENTICATION</h2>
-    <p class="muted">
-      Sign in using credentials configured on the Render server.
-    </p>
-
-    <form id="loginForm">
-      <label for="username">Admin Username</label>
-      <input
-        id="username"
-        name="username"
-        value="115577"
-        required
-        autocomplete="username"
-        placeholder="Admin username"
-      >
-
-      <label for="password">Admin Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        required
-        autocomplete="current-password"
-        placeholder="Enter admin password"
-      >
-
-      <button id="loginButton" type="submit">
-        AUTHENTICATE ↗
-      </button>
-    </form>
-
-    <div id="loginMsg" class="msg" role="status"></div>
-  </section>
-
-  <!-- ADMIN DASHBOARD -->
-  <section id="dashboard" class="hidden">
-
-    <div class="row">
-      <div>
-        <h2>CONTROL ROOM</h2>
-        <p class="muted">
-          Only authenticated admins can manage studio videos.
-        </p>
-      </div>
-
-      <div>
-        <button type="button" onclick="logout()">LOG OUT</button>
-        <a class="btn" href="/" target="_blank" rel="noopener">
-          OPEN PUBLIC STUDIO
-        </a>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <span class="muted">PUBLISHED VIDEOS</span>
-        <strong id="total">0</strong>
-      </div>
-
-      <div class="stat">
-        <span class="muted">TOTAL VIEWS</span>
-        <strong id="views">0</strong>
-      </div>
-
-      <div class="stat">
-        <span class="muted">PASSWORD ROTATION</span>
-        <strong>10 MIN</strong>
-      </div>
-    </div>
-
-    <!-- PUBLISH -->
-    <section class="panel">
-      <h2>＋ PUBLISH VIDEO</h2>
-
-      <form id="publishForm">
-        <label for="title">Video Title</label>
-        <input
-          id="title"
-          required
-          maxlength="120"
-          placeholder="ACS Studio Episode 01"
-        >
-
-        <label for="driveUrl">Google Drive Share Link</label>
-        <input
-          id="driveUrl"
-          type="url"
-          required
-          placeholder="https://drive.google.com/file/d/FILE_ID/view"
-        >
-
-        <label for="description">Description (Optional)</label>
-        <textarea
-          id="description"
-          maxlength="500"
-          placeholder="Short video description"
-        ></textarea>
-
-        <label for="videoPassword">Initial Video Password</label>
-        <input
-          id="videoPassword"
-          maxlength="128"
-          placeholder="Leave blank to generate a password"
-        >
-
-        <label class="checkbox-row">
-          <input id="rotate" type="checkbox" checked>
-          Automatically rotate password every 10 minutes
-        </label>
-
-        <button id="publishButton" type="submit">
-          PUBLISH TO PUBLIC STUDIO
-        </button>
+        <button id="loginButton" type="submit">AUTHENTICATE ↗</button>
       </form>
-
-      <div id="publishMsg" class="msg" role="status"></div>
+      <div id="loginMsg" class="msg" role="status"></div>
     </section>
 
-    <!-- VIDEO LIBRARY -->
-    <section class="panel">
-      <h2>▤ VIDEO LIBRARY / LIVE PASSWORDS</h2>
-
-      <p class="small">
-        Current passwords are visible only to authenticated admins.
-        Rotation invalidates the previous password when supported by the
-        backend. Share passwords only with intended viewers.
-      </p>
-
-      <button type="button" onclick="refresh()">↻ REFRESH LIBRARY</button>
-
-      <div id="library" aria-live="polite">
-        <p class="muted">Loading library...</p>
+    <section id="dashboard" class="hidden">
+      <div class="row">
+        <div>
+          <h2>CONTROL ROOM</h2>
+          <p class="muted">Only authenticated admins can manage studio videos and visitor chats.</p>
+        </div>
+        <div>
+          <button type="button" onclick="logout()">LOG OUT</button>
+          <a class="btn" href="/" target="_blank" rel="noopener">OPEN PUBLIC STUDIO</a>
+        </div>
       </div>
+
+      <div class="stats">
+        <div class="stat"><span class="muted">PUBLISHED VIDEOS</span><strong id="total">0</strong></div>
+        <div class="stat"><span class="muted">TOTAL VIEWS</span><strong id="views">0</strong></div>
+        <div class="stat"><span class="muted">PASSWORD ROTATION</span><strong>10 MIN</strong></div>
+      </div>
+
+      <section class="panel">
+        <h2>＋ PUBLISH VIDEO</h2>
+        <form id="publishForm">
+          <label for="title">Video Title</label>
+          <input id="title" required maxlength="120" placeholder="ACS Studio Episode 01">
+
+          <label for="driveUrl">Video URL (Google Drive / Catbox / YouTube / MP4)</label>
+          <input id="driveUrl" type="url" required placeholder="https://drive.google.com/... or https://files.catbox.moe/... or https://youtu.be/...">
+
+          <label for="description">Description (Optional)</label>
+          <textarea id="description" maxlength="500" placeholder="Short video description"></textarea>
+
+          <label for="videoPassword">Initial Video Password</label>
+          <input id="videoPassword" maxlength="128" placeholder="Leave blank to generate a password">
+
+          <label class="checkbox-row"><input id="rotate" type="checkbox" checked>Automatically rotate password every 10 minutes</label>
+
+          <button id="publishButton" type="submit">PUBLISH TO PUBLIC STUDIO</button>
+        </form>
+        <div id="publishMsg" class="msg" role="status"></div>
+      </section>
+
+      <section class="panel">
+        <h2>▤ VIDEO LIBRARY / LIVE PASSWORDS</h2>
+        <p class="small">Current passwords are visible only to authenticated admins. Rotation invalidates the previous password when supported by the backend. Share passwords only with intended viewers.</p>
+        <button type="button" onclick="refresh()">↻ REFRESH LIBRARY</button>
+        <div id="library" aria-live="polite"><p class="muted">Loading library...</p></div>
+      </section>
+
+      <section class="panel">
+        <h2>✉ CONTACT MESSAGES</h2>
+        <div id="chatMessages" class="chat-list">Loading messages...</div>
+      </section>
     </section>
 
-  </section>
+    <p class="small">SECURITY: Use HTTPS, strong admin credentials, persistent storage, session protection and API rate limiting for production.</p>
+  </main>
 
-  <p class="small">
-    SECURITY: Use HTTPS, strong admin credentials, persistent storage,
-    session protection and API rate limiting for production.
-  </p>
+  <footer>ACS TONMOY STUDIO · ADMIN CONSOLE · AUTHORIZED ACCESS ONLY</footer>
 
-</main>
+  <script>
+    "use strict";
+    const $ = id => document.getElementById(id);
+    let busy = false;
+    let refreshTimer = null;
 
-<footer>
-  ACS TONMOY STUDIO · ADMIN CONSOLE · AUTHORIZED ACCESS ONLY
-</footer>
-
-<script>
-"use strict";
-
-const $ = id => document.getElementById(id);
-
-let busy = false;
-let refreshTimer = null;
-
-/*
-  This page is served by the Render backend.
-  API paths are relative to the current Render domain.
-*/
-async function api(url, opts = {}) {
-  const response = await fetch(url, {
-    ...opts,
-    credentials: "same-origin",
-    headers: {
-      ...(opts.body ? {"Content-Type": "application/json"} : {}),
-      ...(opts.headers || {})
+    async function api(url, opts = {}) {
+      const response = await fetch(url, {
+        ...opts,
+        credentials: "same-origin",
+        headers: {
+          ...(opts.body ? {"Content-Type": "application/json"} : {}),
+          ...(opts.headers || {})
+        }
+      });
+      const data = await response.json().catch(() => ({ error: "Invalid server response" }));
+      if (!response.ok) throw new Error(data.error || "Request failed: " + response.status);
+      return data;
     }
-  });
 
-  const data = await response.json().catch(() => ({
-    error: "Invalid server response"
-  }));
+    function showMessage(id, message, isError = false) {
+      const element = $(id);
+      element.textContent = message;
+      element.className = isError ? "msg bad" : "msg";
+    }
 
-  if (!response.ok) {
-    throw new Error(data.error || "Request failed: " + response.status);
-  }
+    function setBusy(buttonId, state) {
+      const button = $(buttonId);
+      if (button) button.disabled = state;
+    }
 
-  return data;
-}
-
-function showMessage(id, message, isError = false) {
-  const element = $(id);
-  element.textContent = message;
-  element.className = isError ? "msg bad" : "msg";
-}
-
-function setBusy(buttonId, state) {
-  const button = $(buttonId);
-  if (button) button.disabled = state;
-}
-
-function showDashboard() {
-  $("loginPanel").classList.add("hidden");
-  $("dashboard").classList.remove("hidden");
-
-  if (refreshTimer) clearInterval(refreshTimer);
-
-  refresh();
-  refreshTimer = setInterval(() => {
-    if (!$("dashboard").classList.contains("hidden")) {
+    function showDashboard() {
+      $("loginPanel").classList.add("hidden");
+      $("dashboard").classList.remove("hidden");
+      if (refreshTimer) clearInterval(refreshTimer);
       refresh();
-    }
-  }, 15000);
-}
-
-function showLogin() {
-  $("loginPanel").classList.remove("hidden");
-  $("dashboard").classList.add("hidden");
-
-  if (refreshTimer) {
-    clearInterval(refreshTimer);
-    refreshTimer = null;
-  }
-}
-
-/* CHECK AUTHENTICATED SESSION */
-async function check() {
-  try {
-    await api("/api/admin/me");
-    showDashboard();
-  } catch {
-    showLogin();
-  }
-}
-
-/* LOGIN */
-$("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  if (busy) return;
-  busy = true;
-  setBusy("loginButton", true);
-  showMessage("loginMsg", "VERIFYING ADMIN CREDENTIALS...");
-
-  try {
-    await api("/api/admin/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: $("username").value,
-        password: $("password").value
-      })
-    });
-
-    $("password").value = "";
-    showMessage("loginMsg", "ACCESS GRANTED");
-    showDashboard();
-  } catch (error) {
-    showMessage("loginMsg", error.message, true);
-  } finally {
-    busy = false;
-    setBusy("loginButton", false);
-  }
-});
-
-/* PUBLISH VIDEO */
-$("publishForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  if (busy) return;
-  busy = true;
-  setBusy("publishButton", true);
-  showMessage("publishMsg", "PUBLISHING VIDEO...");
-
-  try {
-    const data = await api("/api/admin/videos", {
-      method: "POST",
-      body: JSON.stringify({
-        title: $("title").value.trim(),
-        driveUrl: $("driveUrl").value.trim(),
-        description: $("description").value.trim(),
-        password: $("videoPassword").value,
-        rotate: $("rotate").checked
-      })
-    });
-
-    const message = data.password
-      ? "Published successfully.\nCurrent password: " + data.password
-      : "Published successfully.";
-
-    showMessage("publishMsg", message);
-    $("publishForm").reset();
-    $("rotate").checked = true;
-
-    await refresh();
-  } catch (error) {
-    showMessage("publishMsg", error.message, true);
-  } finally {
-    busy = false;
-    setBusy("publishButton", false);
-  }
-});
-
-/* ESCAPE TEXT BEFORE INSERTING INTO HTML */
-function esc(value) {
-  return String(value ?? "").replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[character]));
-}
-
-/* LOAD LIBRARY */
-async function refresh() {
-  const library = $("library");
-
-  try {
-    const data = await api("/api/admin/videos");
-
-    if (!Array.isArray(data)) {
-      throw new Error("Unexpected library response");
+      refreshChats();
+      refreshTimer = setInterval(() => {
+        if (!$("dashboard").classList.contains("hidden")) {
+          refresh();
+          refreshChats();
+        }
+      }, 15000);
     }
 
-    $("total").textContent = data.length;
-    $("views").textContent = data.reduce(
-      (sum, video) => sum + Number(video.views || 0), 0
-    );
-
-    if (!data.length) {
-      library.innerHTML =
-        '<p class="muted">No videos published yet.</p>';
-      return;
-    }
-
-    library.innerHTML = data.map(video => {
-      const id = JSON.stringify(String(video.id));
-      const rotate = Boolean(video.rotate);
-
-      const nextRotation = Number(video.nextRotation);
-      const seconds = Number.isFinite(nextRotation)
-        ? Math.max(0, Math.ceil((nextRotation - Date.now()) / 1000))
-        : 0;
-
-      return `
-        <article class="video">
-          <div class="video-title">${esc(video.title)}</div>
-
-          <p class="small">${esc(video.driveUrl)}</p>
-
-          <div class="small">
-            Views: ${Number(video.views || 0)}<br>
-            Rotation: ${rotate ? "ON" : "OFF"}<br>
-            Current password:
-            <b>${esc(video.password || "Not returned by server")}</b><br>
-            Next rotation in approximately ${seconds} seconds
-          </div>
-
-          <div class="row">
-            <button type="button"
-              data-action="password"
-              data-id="${esc(video.id)}">
-              CHANGE PASSWORD
-            </button>
-
-            <button type="button"
-              data-action="rotate"
-              data-id="${esc(video.id)}"
-              data-rotate="${!rotate}">
-              ${rotate ? "DISABLE ROTATION" : "ENABLE ROTATION"}
-            </button>
-
-            <button type="button"
-              data-action="delete"
-              data-id="${esc(video.id)}">
-              DELETE VIDEO
-            </button>
-          </div>
-        </article>
-      `;
-    }).join("");
-
-  } catch (error) {
-    library.textContent = error.message;
-  }
-}
-
-/* USE EVENT DELEGATION FOR LIBRARY ACTIONS */
-$("library").addEventListener("click", async event => {
-  const button = event.target.closest("button[data-action]");
-  if (!button) return;
-
-  const id = button.dataset.id;
-  const action = button.dataset.action;
-
-  if (action === "password") {
-    await changePassword(id);
-  } else if (action === "rotate") {
-    await toggleRotate(id, button.dataset.rotate === "true");
-  } else if (action === "delete") {
-    await deleteVideo(id);
-  }
-});
-
-/* CHANGE VIDEO PASSWORD */
-async function changePassword(id) {
-  const password = prompt(
-    "Enter a new password, or leave blank to generate one:"
-  );
-
-  if (password === null) return;
-
-  try {
-    const data = await api(
-      "/api/admin/videos/" + encodeURIComponent(id) + "/password",
-      {
-        method: "POST",
-        body: JSON.stringify({password})
+    function showLogin() {
+      $("loginPanel").classList.remove("hidden");
+      $("dashboard").classList.add("hidden");
+      if (refreshTimer) {
+        clearInterval(refreshTimer);
+        refreshTimer = null;
       }
-    );
+    }
 
-    alert(data.password
-      ? "New video password: " + data.password
-      : "Password updated."
-    );
+    async function check() {
+      try { await api("/api/admin/me"); showDashboard(); }
+      catch { showLogin(); }
+    }
 
-    await refresh();
-  } catch (error) {
-    alert(error.message);
-  }
-}
+    $("loginForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (busy) return;
+      busy = true;
+      setBusy("loginButton", true);
+      showMessage("loginMsg", "VERIFYING ADMIN CREDENTIALS...");
 
-/* TOGGLE ROTATION */
-async function toggleRotate(id, rotate) {
-  try {
-    await api(
-      "/api/admin/videos/" + encodeURIComponent(id) + "/rotate",
-      {
-        method: "POST",
-        body: JSON.stringify({rotate})
+      try {
+        await api("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("username").value, password: $("password").value }) });
+        $("password").value = "";
+        showMessage("loginMsg", "ACCESS GRANTED");
+        showDashboard();
+      } catch (error) {
+        showMessage("loginMsg", error.message, true);
+      } finally {
+        busy = false;
+        setBusy("loginButton", false);
       }
-    );
-
-    await refresh();
-  } catch (error) {
-    alert(error.message);
-  }
-}
-
-/* DELETE VIDEO */
-async function deleteVideo(id) {
-  if (!confirm("Delete this video from the studio?")) return;
-
-  try {
-    await api("/api/admin/videos/" + encodeURIComponent(id), {
-      method: "DELETE"
     });
 
-    await refresh();
-  } catch (error) {
-    alert(error.message);
-  }
-}
+    $("publishForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (busy) return;
+      busy = true;
+      setBusy("publishButton", true);
+      showMessage("publishMsg", "PUBLISHING VIDEO...");
 
-/* LOG OUT */
-async function logout() {
-  try {
-    await api("/api/admin/logout", {
-      method: "POST",
-      body: "{}"
+      try {
+        const data = await api("/api/admin/videos", { method: "POST", body: JSON.stringify({ title: $("title").value.trim(), driveUrl: $("driveUrl").value.trim(), description: $("description").value.trim(), password: $("videoPassword").value, rotate: $("rotate").checked }) });
+        const message = data.password ? "Published successfully.\nCurrent password: " + data.password : "Published successfully.";
+        showMessage("publishMsg", message);
+        $("publishForm").reset();
+        $("rotate").checked = true;
+        await refresh();
+      } catch (error) {
+        showMessage("publishMsg", error.message, true);
+      } finally {
+        busy = false;
+        setBusy("publishButton", false);
+      }
     });
-  } catch (error) {
-    console.error("Logout request failed:", error);
-  }
 
-  showLogin();
-}
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>\"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
+    }
 
-/* START */
-check();
-</script>
+    async function refresh() {
+      const library = $("library");
+      try {
+        const data = await api("/api/admin/videos");
+        if (!Array.isArray(data)) throw new Error("Unexpected library response");
+        $("total").textContent = data.length;
+        $("views").textContent = data.reduce((sum, video) => sum + Number(video.views || 0), 0);
+        if (!data.length) {
+          library.innerHTML = '<p class="muted">No videos published yet.</p>';
+          return;
+        }
 
+        library.innerHTML = data.map(video => {
+          const rotate = Boolean(video.rotate);
+          const nextRotation = Number(video.nextRotation);
+          const seconds = Number.isFinite(nextRotation) ? Math.max(0, Math.ceil((nextRotation - Date.now()) / 1000)) : 0;
+          return `
+            <article class="video">
+              <div class="video-title">${esc(video.title)}</div>
+              <p class="small">${esc(video.driveUrl)}</p>
+              <div class="small">
+                Views: ${Number(video.views || 0)}<br>
+                Rotation: ${rotate ? "ON" : "OFF"}<br>
+                Current password: <b>${esc(video.password || "Not returned by server")}</b><br>
+                Next rotation in approximately ${seconds} seconds
+              </div>
+              <div class="row">
+                <button type="button" data-action="password" data-id="${esc(video.id)}">CHANGE PASSWORD</button>
+                <button type="button" data-action="rotate" data-id="${esc(video.id)}" data-rotate="${!rotate}">${rotate ? "DISABLE ROTATION" : "ENABLE ROTATION"}</button>
+                <button type="button" data-action="delete" data-id="${esc(video.id)}">DELETE VIDEO</button>
+              </div>
+            </article>
+          `;
+        }).join("");
+      } catch (error) {
+        library.textContent = error.message;
+      }
+    }
+
+    $("library").addEventListener("click", async event => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+      const id = button.dataset.id;
+      const action = button.dataset.action;
+      if (action === "password") await changePassword(id);
+      else if (action === "rotate") await toggleRotate(id, button.dataset.rotate === "true");
+      else if (action === "delete") await deleteVideo(id);
+    });
+
+    async function changePassword(id) {
+      const password = prompt("Enter a new password, or leave blank to generate one:");
+      if (password === null) return;
+      try {
+        const data = await api("/api/admin/videos/" + encodeURIComponent(id) + "/password", { method: "POST", body: JSON.stringify({ password }) });
+        alert(data.password ? "New video password: " + data.password : "Password updated.");
+        await refresh();
+      } catch (error) { alert(error.message); }
+    }
+
+    async function toggleRotate(id, rotate) {
+      try {
+        await api("/api/admin/videos/" + encodeURIComponent(id) + "/rotate", { method: "POST", body: JSON.stringify({ rotate }) });
+        await refresh();
+      } catch (error) { alert(error.message); }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm("Delete this video from the studio?")) return;
+      try {
+        await api("/api/admin/videos/" + encodeURIComponent(id), { method: "DELETE" });
+        await refresh();
+      } catch (error) { alert(error.message); }
+    }
+
+    async function logout() {
+      try { await api("/api/admin/logout", { method: "POST", body: "{}" }); }
+      catch (error) { console.error("Logout request failed:", error); }
+      showLogin();
+    }
+
+    async function refreshChats() {
+      const box = $("chatMessages");
+      try {
+        const data = await api("/api/admin/chat");
+        const messages = Array.isArray(data.messages) ? data.messages : [];
+        if (!messages.length) {
+          box.innerHTML = '<p class="muted">No visitor messages yet.</p>';
+          return;
+        }
+
+        box.innerHTML = messages.map(item => {
+          const replies = Array.isArray(item.replies) ? item.replies : [];
+          const replyHtml = replies.length
+            ? replies.map(reply => `<div class="reply-box"><div class="small"><strong>Admin:</strong> ${esc(reply.text)}</div><div class="small">${new Date(reply.createdAt).toLocaleString()}</div></div>`).join("")
+            : `<div class="reply-box"><div class="small">No admin reply yet.</div></div>`;
+
+          return `
+            <div class="chat-thread">
+              <div><strong>${esc(item.name || 'Guest')}</strong> · <span class="small">${esc(item.email || '')}</span></div>
+              <div class="meta">${new Date(item.createdAt).toLocaleString()} · Status: ${esc(item.status || 'new')}</div>
+              <p>${esc(item.message)}</p>
+              <div class="reply-box">
+                <textarea data-id="${esc(item.id)}" placeholder="Write admin reply..."></textarea>
+                <button type="button" data-reply-id="${esc(item.id)}">SEND REPLY</button>
+              </div>
+              ${replyHtml}
+            </div>
+          `;
+        }).join("");
+
+        box.querySelectorAll("button[data-reply-id]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.dataset.replyId;
+            const area = box.querySelector(`textarea[data-id="${CSS.escape(id)}"]`);
+            if (!area) return;
+            const text = area.value.trim();
+            if (!text) {
+              alert("Write a reply before sending.");
+              return;
+            }
+            try {
+              await api("/api/admin/chat/" + encodeURIComponent(id) + "/reply", { method: "POST", body: JSON.stringify({ reply: text }) });
+              area.value = "";
+              await refreshChats();
+            } catch (error) {
+              alert(error.message);
+            }
+          });
+        });
+      } catch (error) {
+        box.innerHTML = `<p class="bad">${esc(error.message)}</p>`;
+      }
+    }
+
+    check();
+  </script>
 </body>
 </html>
+
